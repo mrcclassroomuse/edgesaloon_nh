@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+   <meta charset="UTF-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <title>Join The Team | The Edge Salon</title>
+   <style>
+       :root {
+           --teal: #008080;
+           --light-blue: #add8e6;
+           --soft-bg: #f0f8ff; /* Alice Blue */
+           --white: #ffffff;
+           --dark: #2c3e50;
+       }
+
+
+       body {
+           font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+           margin: 0;
+           background-color: var(--soft-bg);
+           color: var(--dark);
+       }
+
+
+       nav {
+           background: var(--teal);
+           padding: 1rem;
+           text-align: center;
+       }
+
+
+       nav a {
+           color: white;
+           text-decoration: none;
+           margin: 0 15px;
+           text-transform: uppercase;
+           font-size: 0.9rem;
+           font-weight: bold;
+       }
+
+
+       .app-container {
+           max-width: 700px;
+           width: 90%;
+           margin: 40px auto;
+           background: var(--white);
+           padding: 40px;
+           border-radius: 15px;
+           box-shadow: 0 10px 25px rgba(0, 128, 128, 0.1);
+           border-top: 8px solid var(--teal);
+       }
+
+
+       h1 { color: var(--teal); text-align: center; margin-bottom: 30px; }
+
+
+       .form-group { margin-bottom: 20px; }
+
+
+       label {
+           display: block;
+           margin-bottom: 8px;
+           font-weight: 600;
+       }
+
+
+       input[type="text"],
+       input[type="email"],
+       input[type="tel"],
+       input[type="url"],
+       select,
+       textarea {
+           width: 100%;
+           padding: 12px;
+           border: 2px solid #eef2f3;
+           border-radius: 8px;
+           box-sizing: border-box;
+           font-size: 1rem;
+       }
+
+
+       /* Checkbox Styling */
+       .checkbox-group {
+           background: #f9f9f9;
+           padding: 15px;
+           border-radius: 8px;
+           border: 1px solid #ddd;
+       }
+
+
+       .checkbox-item {
+           display: flex;
+           align-items: center;
+           margin-bottom: 10px;
+           cursor: pointer;
+       }
+
+
+       .checkbox-item input {
+           margin-right: 12px;
+           width: 18px;
+           height: 18px;
+           accent-color: var(--teal);
+       }
+
+
+       .btn-apply {
+           background: var(--light-blue);
+           color: var(--teal);
+           padding: 16px;
+           border: none;
+           width: 100%;
+           border-radius: 8px;
+           cursor: pointer;
+           font-size: 1.1rem;
+           font-weight: bold;
+           text-transform: uppercase;
+           transition: 0.3s;
+           margin-top: 10px;
+       }
+
+
+       .btn-apply:hover {
+           background: var(--teal);
+           color: white;
+       }
+
+
+       @media (max-width: 600px) {
+           .app-container { padding: 20px; margin: 20px auto; }
+       }
+   </style>
+</head>
+<body>
+
+
+   <nav><a href="index.html">Home</a> <a href="services.html">Services</a> <a href="policies.html">Policies</a> <a href="shop.html">Shop</a></nav>
+
+
+   <div class="app-container">
+       <h1>Career Application</h1>
+      
+       <form action="#" method="POST">
+           <!-- Source -->
+           <div class="form-group">
+               <label>How did you hear about us?</label>
+               <input type="text" placeholder="Word of mouth, Instagram, etc." required>
+           </div>
+
+
+           <!-- Name -->
+           <div class="form-group">
+               <label>First & Last Name</label>
+               <input type="text" placeholder="Jane Doe" required>
+           </div>
+
+
+           <!-- Contact info -->
+           <div class="form-group">
+               <label>Email Address</label>
+               <input type="email" placeholder="email@example.com" required>
+           </div>
+
+
+           <div class="form-group">
+               <label>Phone Number</label>
+               <input type="tel" placeholder="(502) 000-0000" required>
+           </div>
+
+
+           <!-- Socials -->
+           <div class="form-group">
+               <label>Instagram / Facebook Portfolio</label>
+               <input type="url" placeholder="https://instagram.com">
+           </div>
+
+
+           <!-- Licensing Checkboxes -->
+           <div class="form-group">
+               <label>Are you a licensed Cosmetologist / Nail Tech / Esthetician in the state of Kentucky? (Required)</label>
+               <div class="checkbox-group">
+                   <label class="checkbox-item"><input type="checkbox" name="license" value="yes"> Yes</label>
+                   <label class="checkbox-item"><input type="checkbox" name="license" value="no"> No</label>
+                   <label class="checkbox-item"><input type="checkbox" name="license" value="student"> Still in hair school</label>
+               </div>
+           </div>
+
+
+           <!-- Statement -->
+           <div class="form-group">
+               <label>Why would you like to work with us at The Edge?</label>
+               <textarea rows="5" placeholder="Tell us what makes you a great fit..."></textarea>
+           </div>
+
+
+           <button type="submit" class="btn-apply">Submit Application</button>
+       </form>
+   </div>
+
+
+</body>
+</html>
+
+
+
