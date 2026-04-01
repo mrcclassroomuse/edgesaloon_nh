@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+   <meta charset="UTF-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <link rel="stylesheet" href="style.css">
+   <title>Shop | The Edge Salon</title>
+   <style>
+       :root { --teal: #008080; --l-blue: #add8e6; }
+       .service-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 25px; padding: 20px 0; }
+       .glass-section { display: flex; flex-direction: column; justify-content: space-between; height: 100%; padding: 20px; border-radius: 15px; text-align: center; background: white; box-shadow: 0 4px 10px rgba(0,0,0,0.05); }
+       .photo-box img { width: 100%; height: 250px; object-fit: cover; border-radius: 10px; margin-bottom: 15px; }
+       .btn { background: var(--teal); color: white; border: none; padding: 10px; border-radius: 5px; cursor: pointer; width: 100%; }
+       #cart-widget { position: fixed; bottom: 20px; right: 20px; background: var(--l-blue); color: #1a1a1a; padding: 15px 25px; border-radius: 50px; font-weight: bold; box-shadow: 0 4px 15px rgba(0,0,0,0.3); cursor: pointer; z-index: 1000; }
+       #cart-modal { display: none; position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); background: white; padding: 25px; border-radius: 15px; box-shadow: 0 0 100px rgba(0,0,0,0.5); z-index: 2000; width: 90%; max-width: 400px; }
+       .cart-item-row { display: flex; justify-content: space-between; margin-bottom: 10px; border-bottom: 1px solid #eee; padding-bottom: 5px; }
+       .remove-btn { color: red; cursor: pointer; font-weight: bold; }
+       .btn-checkout { background: var(--teal); color: white; width: 100%; padding: 12px; border: none; border-radius: 5px; cursor: pointer; margin-top: 10px; font-weight: bold; }
+   </style>
+</head>
+<body>
+   <nav><a href="index.html">Home</a> <a href="services.html">Services</a> <a href="policies.html">Policies</a> <a href="shop.html">Shop</a></nav>
+   <div class="container">
+       <h2>Professional Aftercare</h2>
+       <div class="service-grid">
+           <div class="glass-section">
+               <div class="photo-box"><img src="https://f.playcode.io/p-2672479/v-1/019d0701-f0aa-769c-93a7-8419e820b60f/screenshot-2026-03-19-12.49.42-pm.png"></div>
+               <h3>Hydrating Shampoo</h3><p>$22.00</p>
+               <button class="btn" onclick="addToCart('Hydrating Shampoo', 22)">Add to Cart</button>
+           </div>
+           <div class="glass-section">
+               <div class="photo-box"><img src="https://f.playcode.io/p-2672479/v-1/019d2f76-7bf8-76cd-b5c0-089c82c1f267/screenshot-2026-03-19-12.50.02-pm.png"></div>
+               <h3>Hydrating Conditioner</h3><p>$22.00</p>
+               <button class="btn" onclick="addToCart('Hydrating Conditioner', 22)">Add to Cart</button>
+           </div>
+           <div class="glass-section">
+               <div class="photo-box"><img src="https://f.playcode.io/p-2672479/v-1/019d2f7b-7c6f-7098-bb9e-1893c42d5e4b/screenshot-2026-03-27-9.28.07-am.png"></div>
+               <h3>Molecular Repair Mask</h3><p>$75.00</p>
+               <button class="btn" onclick="addToCart('Repair Mask', 75)">Add to Cart</button>
+           </div>
+       </div>
+   </div>
+   <div id="cart-modal">
+       <h3>Your Bag</h3>
+       <div id="cart-items-list"></div>
+       <p><strong>Total: $<span id="modal-total">0.00</span></strong></p>
+       <button class="btn-checkout" onclick="handleCheckout()">Proceed to Checkout</button>
+       <button onclick="toggleCart()" style="width:100%; border:none; margin-top:5px; background:none; cursor:pointer;">Close</button>
+   </div>
+   <div id="cart-widget" onclick="toggleCart()">🛒 <span id="cart-count">0</span> Items | $<span id="cart-price">0.00</span></div>
+   <script>
+       let cart = [];
+       function addToCart(name, price) { cart.push({ name, price }); updateDisplay(); }
+       function removeItem(index) { cart.splice(index, 1); updateDisplay(); renderCart(); }
+       function updateDisplay() {
+           let total = cart.reduce((sum, item) => sum + item.price, 0);
+           document.getElementById('cart-count').innerText = cart.length;
+           document.getElementById('cart-price').innerText = total.toFixed(2);
+           document.getElementById('modal-total').innerText = total.toFixed(2);
+       }
+       function toggleCart() {
+           const m = document.getElementById('cart-modal');
+           m.style.display = (m.style.display === "block") ? "none" : "block";
+           if (m.style.display === "block") renderCart();
+       }
+       function renderCart() {
+           const list = document.getElementById('cart-items-list');
+           list.innerHTML = cart.length === 0 ? "Empty" : cart.map((item, i) => `<div class="cart-item-row">${item.name} - $${item.price} <span class="remove-btn" onclick="removeItem(${i})">✕</span></div>`).join('');
+       }
+       function handleCheckout() {
+           if (cart.length === 0) return alert("Cart is empty!");
+           localStorage.setItem('edgeCart', JSON.stringify(cart));
+           localStorage.setItem('edgeTotal', document.getElementById('modal-total').innerText);
+           window.location.href = 'checkout.html';
+       }
+   </script>
+</body>
+</html>
+
