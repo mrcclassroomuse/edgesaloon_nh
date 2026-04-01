@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+   <meta charset="UTF-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <link rel="stylesheet" href="style.css">
+   <title>Checkout | The Edge Salon</title>
+   <style>
+       body { font-family: sans-serif; background: #f0f8ff; padding: 20px; }
+       .checkout-container { max-width: 500px; margin: auto; background: white; padding: 30px; border-radius: 15px; box-shadow: 0 5px 15px rgba(0,0,0,0.1); }
+       input { width: 100%; padding: 10px; margin: 10px 0; border: 1px solid #ddd; border-radius: 5px; box-sizing: border-box; }
+       .btn-confirm { background: #008080; color: white; border: none; width: 100%; padding: 15px; border-radius: 8px; cursor: pointer; font-weight: bold; }
+   </style>
+</head>
+<body>
+<nav><a href="index.html">Home</a> <a href="services.html">Services</a> <a href="policies.html">Policies</a> <a href="shop.html">Shop</a></nav>
+<div class="checkout-container">
+   <h2>Checkout</h2>
+   <div id="summary"></div>
+   <p><strong>Total: $<span id="final-total"></span></strong></p>
+   <form onsubmit="finishOrder(event)">
+       <input type="text" placeholder="Full Name" required>
+       <input type="email" placeholder="Email Address" required>
+       <input type="tel" placeholder="Phone Number" required>
+       <button class="btn-confirm">Place Order</button>
+   </form>
+</div>
+<script>
+   const cart = JSON.parse(localStorage.getItem('edgeCart')) || [];
+   document.getElementById('final-total').innerText = localStorage.getItem('edgeTotal') || "0.00";
+   document.getElementById('summary').innerHTML = cart.map(i => `<p>${i.name} - $${i.price}</p>`).join('');
+   function finishOrder(e) {
+       e.preventDefault();
+       alert("Order Received! A stylist will contact you for payment.");
+       localStorage.clear();
+       window.location.href = 'index.html';
+   }
+</script>
+</body>
+</html>
+
+
+
+
+<div class="checkout-container">
+   <h2>Finalize Your Order</h2>
+  
+   <div class="order-summary">
+       <h4>Order Summary</h4>
+       <div id="summary-list"></div>
+       <hr>
+       <p><strong>Total Due: $<span id="final-total">0.00</span></strong></p>
+   </div>
+
+
+   <form id="orderForm">
+       <div class="form-group">
+           <label>Full Name</label>
+           <input type="text" placeholder="Your Name" required>
+       </div>
+       <div class="form-group">
+           <label>Email</label>
+           <input type="email" placeholder="email@example.com" required>
+       </div>
+       <div class="form-group">
+           <label>Phone Number</label>
+           <input type="tel" placeholder="(502) 000-0000" required>
+       </div>
+      
+       <p><small>*Once submitted, a stylist will contact you to arrange payment and pickup/delivery.</small></p>
+       <button type="submit" class="btn-confirm">Place Order</button>
+   </form>
+</div>
+
+
+<script>
+   // Load the cart from the shop page
+   const cart = JSON.parse(localStorage.getItem('edgeCart')) || [];
+   const total = localStorage.getItem('edgeTotal') || "0.00";
+
+
+   const summaryList = document.getElementById('summary-list');
+   document.getElementById('final-total').innerText = total;
+
+
+   if (cart.length === 0) {
+       summaryList.innerHTML = "Your cart is empty.";
+   } else {
+       summaryList.innerHTML = cart.map(item => `<p>${item.name} - $${item.price}</p>`).join('');
+   }
+
+
+   document.getElementById('orderForm').onsubmit = function(e) {
+       e.preventDefault();
+       alert("Thank you! Your order has been sent to The Edge Salon. We will contact you shortly.");
+       localStorage.removeItem('edgeCart'); // Clear cart after order
+       window.location.href = 'index.html';
+   };
+</script>
+
+
+</body>
+</html>
+
+
+
